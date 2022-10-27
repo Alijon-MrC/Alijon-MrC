@@ -60,6 +60,32 @@ app.get('/groups', (req, res) => {
         }))
 })
 
+// Guruhlarni olish uchun so'rov -----------------------------
+app.get('/schedule', (req, res) => {
+    const faculty = req.query.faculty;
+    const group = req.query.group;
+    const lang = req.query.lang;
+    const year = req.query.year;
+    console.log(`/schedule-list?l=${lang}&_faculty=${faculty}`);
+    axios.get(`/group-list?l=${lang}&_department=${faculty}`, {
+        headers: {
+            Authorization: process.env.Authorization,
+            accept: 'application/json'
+        }
+    })
+        .then(response => {
+            const regex = new RegExp(year);
+            res.status(200).send({
+                data: response.data.data.items.filter(item => regex.test(item.name)),
+                error: false
+            })
+        })
+        .catch(err => res.status(400).send({
+            error: true,
+            data: err,
+        }))
+})
+
 
 app.get("/", (req, res) => {
     let count;
