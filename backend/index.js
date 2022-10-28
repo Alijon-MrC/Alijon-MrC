@@ -60,23 +60,25 @@ app.get('/groups', (req, res) => {
         }))
 })
 
-// Guruhlarni olish uchun so'rov -----------------------------
+// Jadvallarni olish uchun so'rov -----------------------------
 app.get('/schedule', (req, res) => {
     const faculty = req.query.faculty;
     const group = req.query.group;
     const lang = req.query.lang;
-    const year = req.query.year;
-    console.log(`/schedule-list?l=${lang}&_faculty=${faculty}`);
-    axios.get(`/group-list?l=${lang}&_department=${faculty}`, {
+    const semester = req.query.semester;
+
+    console.log(`/schedule-list?l=${lang}&_faculty=${faculty}&_group=${group}&_semester=${semester}`);
+    axios.get(`/schedule-list?l=${lang}&_faculty=${faculty}&_group=${group}&_semester=${semester}`, {
         headers: {
             Authorization: process.env.Authorization,
             accept: 'application/json'
         }
     })
         .then(response => {
-            const regex = new RegExp(year);
+            let week = response.data.data.items[response.data.data.items.length - 1]["_week"];
+            console.log(week);
             res.status(200).send({
-                data: response.data.data.items.filter(item => regex.test(item.name)),
+                data: response.data.data.items.filter(item => item["_week"] === week),
                 error: false
             })
         })
