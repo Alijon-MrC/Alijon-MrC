@@ -9,13 +9,33 @@
 
 body {
   font-size: 50px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Poppins", sans-serif !important;
   font-weight: 400;
-  color: #525252;
+  color: #525252 !important;
 }
 
 a {
-  color: inherit;
+  color: inherit !important;
+}
+
+.dropdown-menu {
+  /* width: 150px; */
+  min-width: initial !important;
+}
+
+.dropdown-item-text {
+  cursor: pointer;
+}
+
+.dropdown-item-text:hover {
+  background-color: #67e2e9;
+}
+
+.drop-down button {
+  border: none;
+  width: 100%;
+  background-color: #00B9C2 !important;
+  box-shadow: 5px 1px 10px rgba(0, 184, 194, 0.219);
 }
 
 .main {
@@ -42,10 +62,23 @@ a {
   margin-top: 50px;
 }
 
+.head {
+  display: block
+}
+
 .main h1 span {
   font-size: 80px;
   display: block;
   margin-top: 25px;
+}
+
+.main h1 img {
+  width: 0;
+}
+
+
+.drop-down {
+  display: none;
 }
 
 .main .btn-begin {
@@ -69,6 +102,7 @@ a {
   animation-direction: alternate-reverse;
   animation-timing-function: ease-in-out;
 }
+
 
 .time-table img {
   width: 100%;
@@ -128,13 +162,30 @@ a {
 
 
 @media screen and ((min-width: 1081px) or (max-width: 1070px)) {
+  .head {
+    display: flex
+  }
+
   .main h1 {
     font-size: 20px;
     margin-top: 20px;
+    display: flex;
   }
 
+  .main h1 img {
+    width: 80px;
+  }
+
+  .drop-down {
+    display: block;
+  }
+
+  /* .main img {
+    width: 80px;
+  } */
+
   .main h1 span {
-    margin-top: 15px;
+    margin-top: 5px;
     font-size: 35px;
   }
 
@@ -190,6 +241,27 @@ a {
   .writing-mode {
     writing-mode: initial;
   }
+
+  .main h1 {
+    font-size: 14px;
+    margin-top: 20px;
+    text-align: left;
+    display: flex;
+  }
+
+  .main h1 p {
+    margin-right: 40px !important;
+  }
+
+  .main h1 span {
+    margin-top: 0px;
+    font-size: 18px;
+  }
+
+  .main h1 img {
+    width: 40px !important;
+  }
+
 
   .timetable .header {
     transform: rotate(0);

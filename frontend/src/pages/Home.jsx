@@ -11,14 +11,13 @@ function Home() {
                     Samarqand Davlat Unversiteti <span> Darslar Jadvali </span>
                 </h1>
                 <div>
-                    <Link to="/facultets" className="btn-begin">Boshlash</Link>
+                    <Link to="/schedule" className="btn-begin">Boshlash</Link>
                 </div>
                 <div className="time-table">
                     <img src={timeTable} alt={timeTable.toString()} />
                 </div>
             </div>
         </div>
-
     )
 }
 

@@ -16,7 +16,7 @@ dotenv.config();
 // Fakuletlar olish uchun so'rov -----------------------------
 app.get('/facultets', (req, res) => {
     const lang = req.query.lang;
-    console.log(`/department-list?l=${lang}`);
+
     axios.get(`department-list?l=${lang}`, {
         headers: {
             Authorization: process.env.Authorization,
@@ -24,6 +24,7 @@ app.get('/facultets', (req, res) => {
         }
     })
         .then(response => {
+            console.log(response.data);
             res.status(200).send({
                 data: response.data.data.items.filter(item => item.structureType.code === "11" && item.id !== 2),
                 error: false
@@ -40,7 +41,6 @@ app.get('/groups', (req, res) => {
     const faculty = req.query.faculty;
     const lang = req.query.lang;
     const year = req.query.year;
-    console.log(`/group-list?l=${lang}&_department=${faculty}`);
     axios.get(`/group-list?l=${lang}&_department=${faculty}`, {
         headers: {
             Authorization: process.env.Authorization,
@@ -66,26 +66,37 @@ app.get('/schedule', (req, res) => {
     const group = req.query.group;
     const lang = req.query.lang;
     const semester = req.query.semester;
-
-    console.log(`/schedule-list?l=${lang}&_faculty=${faculty}&_group=${group}&_semester=${semester}`);
-    axios.get(`/schedule-list?l=${lang}&_faculty=${faculty}&_group=${group}&_semester=${semester}`, {
+    axios.get(`/schedule-list?l=${lang}&_faculty=${faculty}&_group=${group}`, {
         headers: {
             Authorization: process.env.Authorization,
             accept: 'application/json'
         }
     })
         .then(response => {
-            let week = response.data.data.items[response.data.data.items.length - 1]["_week"];
-            console.log(week);
-            res.status(200).send({
-                data: response.data.data.items.filter(item => item["_week"] === week),
-                error: false
+            if (response.data.data.items.length !== 0) {
+                let week = response.data.data.items[response.data.data.items.length - 1]["_week"];
+                console.log(week);
+                res.status(200).send({
+                    // data: response.data,
+                    data: response.data.data.items.filter(item => item["_week"] === week),
+                    error: false
+                })
+            }
+            else {
+                res.status(200).send({
+                    // data: response.data,
+                    data: [],
+                    error: false
+                })
+            }
+        })
+        .catch(err => {
+            console.log(err)
+            res.status(400).send({
+                error: true,
+                data: err,
             })
         })
-        .catch(err => res.status(400).send({
-            error: true,
-            data: err,
-        }))
 })
 
 
