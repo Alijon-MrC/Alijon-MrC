@@ -40,9 +40,9 @@ a {
 
 .main {
   background-image: url('./assets/img/bg.png');
-  height: 100vh;
+  min-height: 100vh;
   background-position: left bottom;
-  background-repeat: no-repeat;
+  background-repeat: repeat-y;
 }
 
 /* home styles */
@@ -90,7 +90,7 @@ a {
   margin-top: 50px;
   border: none;
   border-radius: 30px;
-  color: #fff;
+  color: #fff !important;
 }
 
 .main .time-table {
@@ -160,10 +160,46 @@ a {
   transform: rotate(-180deg);
 }
 
+.time {
+  display: flex;
+}
 
-@media screen and ((min-width: 1081px) or (max-width: 1070px)) {
+.clock {
+  font-size: 70px;
+  display: flex;
+}
+
+.clock span {
+  width: 110px;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  line-height: 1;
+
+}
+
+.clock .tick {
+  width: 10px;
+}
+
+
+@media screen and ((min-width: 1085px) or (max-width: 1065px)) {
   .head {
     display: flex
+  }
+
+  .main .begin-title {
+    display: block !important;
+    text-align: center;
+    font-size: 24px;
+  }
+
+  .main .begin-title span {
+    font-size: 20px;
+  }
+
+  .time {
+    display: none !important;
   }
 
   .main h1 {
@@ -193,6 +229,7 @@ a {
     font-size: 24px;
     padding: 10px 50px;
     margin-top: 20px;
+    color: #fff !important;
   }
 
   .logo {
@@ -237,9 +274,13 @@ a {
 
 }
 
-@media screen and (max-width: 1070px) {
+@media screen and (max-width: 1065px) {
   .writing-mode {
     writing-mode: initial;
+  }
+
+  .drop-down button {
+    width: 100px;
   }
 
   .main h1 {
@@ -319,4 +360,73 @@ a {
 
 .button-back a i {
   color: aliceblue;
+}
+
+/* loader animation */
+
+.kinetic {
+  position: relative;
+  margin: auto;
+  height: 80px;
+  width: 80px;
+}
+
+.kinetic::after,
+.kinetic::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border: 50px solid transparent;
+  border-bottom-color: #00B9C2;
+  animation: rotateA 2s linear infinite .5s;
+}
+
+.kinetic::before {
+  transform: rotate(90deg);
+  animation: rotateB 2s linear infinite;
+}
+
+@keyframes rotateA {
+
+  0%,
+  25% {
+    transform: rotate(0deg);
+  }
+
+  50%,
+  75% {
+    transform: rotate(180deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotateB {
+
+  0%,
+  25% {
+    transform: rotate(90deg);
+  }
+
+  50%,
+  75% {
+    transform: rotate(270deg);
+  }
+
+  100% {
+    transform: rotate(450deg);
+  }
+}
+
+.footer {
+  background-color: #525252;
+}
+
+.main-page {
+  min-height: 87vh;
 }

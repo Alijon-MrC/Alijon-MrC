@@ -2,10 +2,16 @@ const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const axios = require('axios');
-const e = require('express');
 
 const app = express();
-app.use(cors());
+var corsOptions = {
+    origin: 'http://localhost:3000',
+    optionsSuccessStatus: 200, // For legacy browser support
+    methods: "GET"
+}
+
+app.use(cors(corsOptions));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
@@ -14,7 +20,7 @@ axios.defaults.baseURL = "https://student.samdu.uz/rest/v1/data";
 dotenv.config();
 
 // Fakuletlar olish uchun so'rov -----------------------------
-app.get('/facultets', (req, res) => {
+app.get('api/facultets', (req, res) => {
     const lang = req.query.lang;
 
     axios.get(`department-list?l=${lang}`, {
@@ -24,7 +30,6 @@ app.get('/facultets', (req, res) => {
         }
     })
         .then(response => {
-            console.log(response.data);
             res.status(200).send({
                 data: response.data.data.items.filter(item => item.structureType.code === "11" && item.id !== 2),
                 error: false
@@ -37,11 +42,11 @@ app.get('/facultets', (req, res) => {
 })
 
 // Guruhlarni olish uchun so'rov -----------------------------
-app.get('/groups', (req, res) => {
+app.get('api/groups', (req, res) => {
     const faculty = req.query.faculty;
     const lang = req.query.lang;
     const year = req.query.year;
-    axios.get(`/group-list?l=${lang}&_department=${faculty}`, {
+    axios.get(`api/group-list?l=${lang}&_department=${faculty}`, {
         headers: {
             Authorization: process.env.Authorization,
             accept: 'application/json'
@@ -61,12 +66,12 @@ app.get('/groups', (req, res) => {
 })
 
 // Jadvallarni olish uchun so'rov -----------------------------
-app.get('/schedule', (req, res) => {
+app.get('api/schedule', (req, res) => {
     const faculty = req.query.faculty;
     const group = req.query.group;
     const lang = req.query.lang;
     const semester = req.query.semester;
-    axios.get(`/schedule-list?l=${lang}&_faculty=${faculty}&_group=${group}`, {
+    axios.get(`api/schedule-list?l=${lang}&_faculty=${faculty}&_group=${group}&_semester=${semester}`, {
         headers: {
             Authorization: process.env.Authorization,
             accept: 'application/json'
@@ -75,7 +80,6 @@ app.get('/schedule', (req, res) => {
         .then(response => {
             if (response.data.data.items.length !== 0) {
                 let week = response.data.data.items[response.data.data.items.length - 1]["_week"];
-                console.log(week);
                 res.status(200).send({
                     // data: response.data,
                     data: response.data.data.items.filter(item => item["_week"] === week),
@@ -91,7 +95,6 @@ app.get('/schedule', (req, res) => {
             }
         })
         .catch(err => {
-            console.log(err)
             res.status(400).send({
                 error: true,
                 data: err,
@@ -100,35 +103,6 @@ app.get('/schedule', (req, res) => {
 })
 
 
-app.get("/", (req, res) => {
-    let count;
-    const allData = []
-    axios.get('/schedule-list?page=1&_faculty=1&_group=1649&_education_year=2022', {
 
-    }).then(response => {
-        count = response.data;
-        let large = -Infinity;
-        response.data.data.items.forEach(element => {
-            console.log(element["_week"]);
-            if (element["_week"] > large) large = element["_week"];
-        });
-
-        res.send(response.data.data.items.filter(item => +item["_week"] === large
-        ));
-    })
-
-    // for (let i = 2; i <= count; i++) {
-    //     axios.get('https://student.samdu.uz/rest/v1/data/department-list?page=' + i, {
-    //         headers: {
-    //             Authorization: process.env.Authorization,
-    //             accept: 'application/json'
-    //         }
-    //     }).then(response => {
-    //         allData.push(...response.data.data.items)
-    //     })
-    // }
-
-    // data => res.status(200).send(data.data)
-})
 
 app.listen(process.env.PORT, () => console.log(`app is running ${process.env.PORT}`))
