@@ -1,10 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
 
 * {
   list-style: none;
   text-decoration: none !important;
   box-sizing: border-box;
-
 }
 
 body {
@@ -34,12 +33,12 @@ a {
 .drop-down button {
   border: none;
   width: 100%;
-  background-color: #00B9C2 !important;
+  background-color: #2d4c8a !important;
   box-shadow: 5px 1px 10px rgba(0, 184, 194, 0.219);
 }
 
 .main {
-  background-image: url('./assets/img/bg.png');
+  background-image: url("./assets/img/bg.png");
   min-height: 100vh;
   background-position: left bottom;
   background-repeat: repeat-y;
@@ -63,7 +62,7 @@ a {
 }
 
 .head {
-  display: block
+  display: block;
 }
 
 .main h1 span {
@@ -76,7 +75,6 @@ a {
   width: 0;
 }
 
-
 .drop-down {
   display: none;
 }
@@ -85,7 +83,7 @@ a {
   font-size: 60px;
   display: inline-block;
   font-weight: 600;
-  background-color: #00B9C2;
+  background-color: #2d4c8a;
   padding: 30px 130px;
   margin-top: 50px;
   border: none;
@@ -102,7 +100,6 @@ a {
   animation-direction: alternate-reverse;
   animation-timing-function: ease-in-out;
 }
-
 
 .time-table img {
   width: 100%;
@@ -126,7 +123,7 @@ a {
   text-align: center;
   color: #fff;
   font-weight: 600;
-  background-color: #00B9C2;
+  background-color: #2d4c8a;
 }
 
 .select .item {
@@ -141,7 +138,7 @@ a {
 }
 
 .header {
-  background-color: #00B9C2;
+  background-color: #2d4c8a;
   text-align: center;
   font-weight: 500;
   color: #fff;
@@ -175,17 +172,15 @@ a {
   display: flex;
   justify-content: center;
   line-height: 1;
-
 }
 
 .clock .tick {
   width: 10px;
 }
 
-
 @media screen and ((min-width: 1085px) or (max-width: 1065px)) {
   .head {
-    display: flex
+    display: flex;
   }
 
   .main .begin-title {
@@ -270,8 +265,6 @@ a {
   .time {
     display: none !important;
   }
-
-
 }
 
 @media screen and (max-width: 1065px) {
@@ -302,7 +295,6 @@ a {
   .main h1 img {
     width: 40px !important;
   }
-
 
   .timetable .header {
     transform: rotate(0);
@@ -348,7 +340,7 @@ a {
 }
 
 .button-back a {
-  background-color: #00B9C2;
+  background-color: #2d4c8a;
   border-radius: 10px;
   border: none;
   color: #fff;
@@ -373,15 +365,15 @@ a {
 
 .kinetic::after,
 .kinetic::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   width: 0;
   height: 0;
   border: 50px solid transparent;
-  border-bottom-color: #00B9C2;
-  animation: rotateA 2s linear infinite .5s;
+  border-bottom-color: #2d4c8a;
+  animation: rotateA 2s linear infinite 0.5s;
 }
 
 .kinetic::before {
@@ -390,7 +382,6 @@ a {
 }
 
 @keyframes rotateA {
-
   0%,
   25% {
     transform: rotate(0deg);
@@ -407,7 +398,6 @@ a {
 }
 
 @keyframes rotateB {
-
   0%,
   25% {
     transform: rotate(90deg);
