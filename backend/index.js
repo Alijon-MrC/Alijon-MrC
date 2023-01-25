@@ -116,10 +116,6 @@ app.get("/api/schedule", (req, res) => {
     });
 });
 
-app.get("/api/nimadur", (req, res) => {
-  res.send("ketti");
-});
-
 app.listen(process.env.PORT, () =>
   console.log(`app is running ${process.env.PORT}`)
 );

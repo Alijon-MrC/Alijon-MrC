@@ -8,8 +8,8 @@ import Group from "./pages/Group";
 import Home from "./pages/Home";
 import Pages from "./pages/Pages";
 import Schedule from "./pages/Schedule";
-// axios.defaults.baseURL = "http://schedule.samdu.uz/api";
-axios.defaults.baseURL = "http://localhost:3002/api";
+axios.defaults.baseURL = "https://schedule.samduuf.uz/api";
+// axios.defaults.baseURL = "http://localhost:3003/api";
 
 function App() {
   return (
