@@ -15,7 +15,7 @@ function Home() {
             <div className="d-flex align-items-center pt-5 flex-column">
                 <div className="logo"><img src={logo} alt="logo" /></div>
                 <h1 className="begin-title">
-                    Samarqand Davlat Unversiteti <span> Darslar Jadvali </span>
+                    Samarqand Davlat Unversiteti Urgut filiali<span> Darslar Jadvali </span>
                 </h1>
                 <div>
                     <Link to="/schedule" className="btn-begin">Boshlash</Link>
